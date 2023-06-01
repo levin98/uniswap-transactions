@@ -17,3 +17,23 @@ def get_transactions(start_block=0):
     except:
         print("Unexpected error")
         return []
+
+
+def get_transaction_by_hash(txn_hash):
+    """Get transaction details by transaction hash from Etherscan API"""
+
+    if not txn_hash:
+        raise ValueError("Transaction hash is required")
+
+    url = f"{Config.ETHERSCAN_API_ENDPOINT}?module=proxy&action=eth_getTransactionReceipt&txhash={txn_hash}&apikey={Config.ETHERSCAN_API_KEY}"
+
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        return response.json().get('result') or {}
+    except requests.exceptions.HTTPError as err:
+        print(err)
+        return {}
+    except:
+        print("Unexpected error")
+        return {}
