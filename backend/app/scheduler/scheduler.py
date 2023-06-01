@@ -16,6 +16,9 @@ def record_live_transactions(app):
             start_block=get_last_block_number())
 
         for txn in data:
+            if Transaction.query.filter_by(txn_hash=txn['hash']).first() is not None:
+                continue
+
             transaction = Transaction(
                 block_number=int(txn['blockNumber']),
                 txn_hash=txn['hash'],
