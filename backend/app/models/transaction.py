@@ -1,4 +1,5 @@
 from app.extensions import db
+from sqlalchemy import desc
 
 
 class Transaction(db.Model):
@@ -12,3 +13,13 @@ class Transaction(db.Model):
 
     def __repr__(self):
         return f'<Txn "{self.txn_hash}" "{self.txn_timestamp}" "{self.gas_price}" "{self.gas_used}">'
+
+
+def get_last_block_number():
+    """Get the last block number recorded in the database"""
+
+    last_record = Transaction.query.order_by(
+        desc(Transaction.txn_timestamp)).first()
+    if last_record is not None:
+        return last_record.block_number
+    return 0
