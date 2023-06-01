@@ -10,10 +10,10 @@ def get_transactions(start_block=0):
     try:
         response = requests.get(url)
         response.raise_for_status()
-        return response.json().get('result')
+        return response.json().get('status') == '1' and response.json().get('result') or []
     except requests.exceptions.HTTPError as err:
         print(err)
-        return None
+        return []
     except:
         print("Unexpected error")
-        return None
+        return []
