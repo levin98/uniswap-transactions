@@ -5,7 +5,9 @@ from app.models.transaction import Transaction
 from app.extensions import db
 from app.scheduler import scheduler
 from app.etherscan import api
+from app.background.utils import record_historical_data
 from datetime import datetime
+from threading import Thread
 import functools
 
 
@@ -79,5 +81,22 @@ def create_app(config_class=Config):
             return jsonify(results), 200
 
         return jsonify(transaction.to_dict()), 200
+
+    @app.route("/historical-transactions", methods=['GET'])
+    def get_historical_transactions():
+        """Retrieve historical transactions with background task from Etherscan API"""
+
+        # Get query parameters
+        start_time = request.args.get("from", None, type=int)
+        end_time = request.args.get("to", None, type=int)
+        if (start_time is None) or (end_time is None):
+            return jsonify({"error": "Please provide both start time and end time"}), 400
+
+        thread = Thread(target=record_historical_data,
+                        args=(app, start_time, end_time))
+        thread.daemon = True
+        thread.start()
+
+        return jsonify({"message": "Historical transactions are being recorded"}), 200
 
     return app
