@@ -1,7 +1,7 @@
 import pytest
 import responses
 from http import HTTPStatus
-from api import get_transactions, get_transaction_by_hash
+from api import get_transactions, get_transaction_by_hash, get_block_number_by_timestamp
 
 
 @responses.activate
@@ -121,3 +121,62 @@ def test_get_transaction_by_hash_failure(mocker):
 
     transactions = get_transaction_by_hash("test-hash")
     assert transactions == {}
+
+
+@responses.activate
+def test_get_block_number_by_timestamp(mocker):
+    """Test get_block_number_by_timestamp function successfully returns transaction"""
+
+    # Mock data
+    mock_data = {
+        "result": "12712551"
+    }
+
+    # Create a mock requests response object
+    mock_resp = mocker.Mock()
+    # Mock the json method to return the mock transactions data
+    mock_resp.json = mocker.Mock(return_value=mock_data)
+    mock_resp.status_code = HTTPStatus.OK
+
+    # Mock the requests.get method to return the mock response object
+    mocker.patch("api.requests.get", return_value=mock_resp)
+
+    transactions = get_block_number_by_timestamp("1578638524")
+    assert transactions == mock_data.get('result')
+
+
+@responses.activate
+def test_get_block_number_by_timestamp_invalid_input(mocker):
+    """Test get_block_number_by_timestamp function fails returns transaction with invalid input"""
+
+    # Mock data
+    mock_data = {
+        "result": "12712551"
+    }
+
+    # Create a mock requests response object
+    mock_resp = mocker.Mock()
+    # Mock the json method to return the mock transactions data
+    mock_resp.json = mocker.Mock(return_value=mock_data)
+    mock_resp.status_code = HTTPStatus.OK
+
+    # Mock the requests.get method to return the mock response object
+    mocker.patch("api.requests.get", return_value=mock_resp)
+
+    with pytest.raises(Exception):
+        transactions = get_block_number_by_timestamp()
+
+
+@responses.activate
+def test_get_block_number_by_timestamp_failure(mocker):
+    """Test get_block_number_by_timestamp function fails to return transaction"""
+
+    # Create a mock requests response object
+    mock_resp = mocker.Mock()
+    mock_resp.json = mocker.Mock(return_value={})
+    mock_resp.status_code = HTTPStatus.INTERNAL_SERVER_ERROR
+
+    mocker.patch("api.requests.get", return_value=mock_resp)
+
+    transactions = get_block_number_by_timestamp("test-hash")
+    assert transactions == ""

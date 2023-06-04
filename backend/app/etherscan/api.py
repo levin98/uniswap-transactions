@@ -37,3 +37,23 @@ def get_transaction_by_hash(txn_hash):
     except:
         print("Unexpected error")
         return {}
+
+
+def get_block_number_by_timestamp(timestamp, closest='before'):
+    """Get block number by timestamp from Etherscan API"""
+
+    if not timestamp:
+        raise ValueError("Timestamp is required")
+
+    url = f"{Config.ETHERSCAN_API_ENDPOINT}?module=block&action=getblocknobytime&timestamp={timestamp}&closest={closest}&apikey={Config.ETHERSCAN_API_KEY}"
+
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        return response.json().get('result') or ""
+    except requests.exceptions.HTTPError as err:
+        print(err)
+        return {}
+    except:
+        print("Unexpected error")
+        return {}
