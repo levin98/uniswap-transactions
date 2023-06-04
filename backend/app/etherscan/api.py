@@ -2,10 +2,12 @@ import requests
 from config import Config
 
 
-def get_transactions(start_block=0):
+def get_transactions(start_block=0, end_block=None):
     """Get ERC20 token transactions from Etherscan API"""
 
     url = f"{Config.ETHERSCAN_API_ENDPOINT}?module=account&action=tokentx&address=0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640&startblock={start_block}&sort=desc&apikey={Config.ETHERSCAN_API_KEY}"
+    if end_block:
+        url += f"&endblock={end_block}"
 
     try:
         response = requests.get(url)
