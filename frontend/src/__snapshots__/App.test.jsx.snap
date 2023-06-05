@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders App with Transaction List 1`] = `
+<div>
+  <div
+    class="App"
+  >
+    <div
+      data-testid="transaction-list"
+    >
+      Mocked Transaction List
+    </div>
+  </div>
+</div>
+`;
