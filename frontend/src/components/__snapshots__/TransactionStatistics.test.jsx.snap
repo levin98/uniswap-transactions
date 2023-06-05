@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders statistics 1`] = `
+<div>
+  <div
+    class="ant-row css-dev-only-do-not-override-k7429z"
+    style="margin-left: -8px; margin-right: -8px;"
+  >
+    <div
+      class="ant-col ant-col-8 css-dev-only-do-not-override-k7429z"
+      style="padding-left: 8px; padding-right: 8px;"
+    >
+      <div
+        class="ant-card ant-card-bordered css-dev-only-do-not-override-k7429z"
+      >
+        <div
+          class="ant-card-body"
+        >
+          <div
+            class="ant-statistic css-dev-only-do-not-override-k7429z"
+          >
+            <div
+              class="ant-statistic-title"
+            >
+              Total Transaction Fee (USDT)
+            </div>
+            <div
+              class="ant-statistic-content"
+            >
+              <span
+                class="ant-statistic-content-value"
+              >
+                NaN
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-col ant-col-8 css-dev-only-do-not-override-k7429z"
+      style="padding-left: 8px; padding-right: 8px;"
+    >
+      <div
+        class="ant-card ant-card-bordered css-dev-only-do-not-override-k7429z"
+      >
+        <div
+          class="ant-card-body"
+        >
+          <div
+            class="ant-statistic css-dev-only-do-not-override-k7429z"
+          >
+            <div
+              class="ant-statistic-title"
+            >
+              Total Transaction Fee (ETH)
+            </div>
+            <div
+              class="ant-statistic-content"
+            >
+              <span
+                class="ant-statistic-content-value"
+              >
+                NaN
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-col ant-col-8 css-dev-only-do-not-override-k7429z"
+      style="padding-left: 8px; padding-right: 8px;"
+    >
+      <div
+        class="ant-card ant-card-bordered css-dev-only-do-not-override-k7429z"
+      >
+        <div
+          class="ant-card-body"
+        >
+          <div
+            class="ant-statistic css-dev-only-do-not-override-k7429z"
+          >
+            <div
+              class="ant-statistic-title"
+            >
+              ETH/USDT
+            </div>
+            <div
+              class="ant-statistic-content"
+            >
+              <span
+                class="ant-statistic-content-value"
+              >
+                <span
+                  class="ant-statistic-content-value-int"
+                >
+                  0
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
