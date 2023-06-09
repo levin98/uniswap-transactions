@@ -19,6 +19,10 @@ def create_app(config_class=Config):
     # Initialize database
     db.init_app(app)
 
+    # Create database tables
+    with app.app_context():
+        db.create_all()
+
     # Initialize scheduler
     scheduler.sched.add_job(functools.partial(
         scheduler.record_live_transactions, app=app), 'interval', seconds=5)
